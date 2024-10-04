@@ -69,13 +69,13 @@
             $closeGreater = null;
             foreach ($results as $key) {
                 if ($key >= $averageResults) {
-                    if ($closeGreater === null || $key < $closeGreater) {
+                    if (is_null($closeGreater) || $key < $closeGreater) {
                         $closeGreater = $key;
                     }
                 }
             }
 
-            if ($closeGreater !== null) {
+            if (!is_null($closeGreater)) {
                 echo "<br> Closest result to or greater than average: $closeGreater";
             } else {
                 echo "<br> No result greater than or equal to average found.";
@@ -153,11 +153,7 @@
 
         $currentPos = $startPos;
 
-        while (true) {
-
-            if ($currentPos < 0 || $currentPos >= count($field)) {
-                break;
-            }
+        while ($currentPos < 0 || $currentPos >= count($field)) {
 
             if ($visited[$currentPos]) {
                 return false;
